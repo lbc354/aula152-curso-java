@@ -33,17 +33,21 @@ public class Aula152 {
 		System.out.print("Status: ");
 		sc.nextLine();
 		OrderStatus status = OrderStatus.valueOf(sc.next());
-		System.out.print("How many items to this order: ");
-		int n = sc.nextInt();
 		
 //		new Date() instancia com o horário do sistema
 		Order order = new Order(new Date(), status, client);
 		
-		for (int i = 1; i <= n; i++) {
+		int i = 1;
+		String productName;
+		do {
 			System.out.println("\nEnter #" + i + " item data");
 			System.out.print("Product name: ");
 			sc.nextLine();
-			String productName = sc.nextLine();
+			productName = sc.nextLine();
+//			quando quiser parar de adicionar, entre com nome vazio
+			if (productName == "") {
+				break;
+			}
 			System.out.print("Product price: ");
 			Double productPrice = sc.nextDouble();
 			System.out.print("Quantity: ");
@@ -52,7 +56,8 @@ public class Aula152 {
 			Product product = new Product(productName, productPrice);
 			OrderItem orderItem = new OrderItem(quantity, productPrice, product);
 			order.addItem(orderItem);
-		}
+			i++;
+		} while (i > 0);
 		
 		System.out.println("\nOrder Sumary");
 		System.out.println(order.toString());
